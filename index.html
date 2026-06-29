@@ -359,9 +359,11 @@
             
             <div class="col-md-4">
                 <div class="card-professional p-4 text-center h-100">
-                    <img src="images/dropdoii1.jpg" alt="Dropdoii Band" class="img-fluid rounded mb-3" style="width: 100%; height: 180px; object-fit: cover;">
-                    
-                    <div class="card-icon mb-3"><i class="bi bi-music-note-beamed" style="font-size: 2rem;"></i></div>
+                    <div class="hobby-img-wrap" onclick="openLightbox('images/dropdoii1.jpg', 'Live Music Concert & Organize')">
+                        <img src="images/dropdoii1.jpg" alt="Dropdoii Band" class="hobby-img img-fluid rounded" style="width: 100%; height: 180px; object-fit: cover;">
+                        <div class="hobby-img-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="card-icon mb-3 mt-3"><i class="bi bi-music-note-beamed" style="font-size: 2rem;"></i></div>
                     <h5 class="fw-bold">Live Music Concert & Organize</h5>
                     <p class="text-muted small">มือกีตาร์วง Dropdoii มีประสบการณ์การออกงานทัวร์ต่างจังหวัด เช่น กรุงเทพ และเชียงใหม่ รวมถึงเป็นสมาชิกผู้จัดงานดนตรีนอกกระแสในพิษณุโลก ทีม Post Ter Punk </p>
                 </div>
@@ -369,19 +371,57 @@
 
             <div class="col-md-4">
                 <div class="card-professional p-4 text-center h-100">
-                    <img src="images/smo1.jpg" alt="Smo Techno" class="img-fluid rounded mb-3" style="width: 100%; height: 180px; object-fit: cover;">
-                    
-                    <div class="card-icon mb-3"><i class="bi bi-controller" style="font-size: 2rem;"></i></div>
+                    <div class="hobby-img-wrap" onclick="openLightbox('images/smo1.jpg', 'Smo Techno')">
+                        <img src="images/smo1.jpg" alt="Smo Techno" class="hobby-img img-fluid rounded" style="width: 100%; height: 180px; object-fit: cover;">
+                        <div class="hobby-img-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                    <div class="card-icon mb-3 mt-3"><i class="bi bi-controller" style="font-size: 2rem;"></i></div>
                     <h5 class="fw-bold">Smo Techno</h5>
                     <p class="text-muted small">เป็นสมาชิกสโมสรนักศึกษา มีส่วนช่วยในกิจกรรมของทางคณะและมหาลัย ส่งเสริมการทำงานเป็นทีม</p>
                 </div>
             </div>
 
-
         </div>
     </div>
 </section>
-    
+
+<!-- Lightbox Modal -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; cursor:zoom-out;" onclick="closeLightbox()">
+    <div style="position:relative; max-width:90vw; max-height:90vh;" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="" style="max-width:90vw; max-height:82vh; border-radius:10px; box-shadow:0 8px 40px rgba(0,0,0,0.6); display:block;">
+        <p id="lightbox-caption" style="color:#fff; text-align:center; margin-top:12px; font-size:1rem; font-family:'Sarabun',sans-serif;"></p>
+        <button onclick="closeLightbox()" style="position:absolute; top:-14px; right:-14px; background:#fff; border:none; border-radius:50%; width:34px; height:34px; font-size:1.3rem; line-height:34px; text-align:center; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.3);">&times;</button>
+    </div>
+</div>
+
+<style>
+.hobby-img-wrap {
+    position: relative;
+    cursor: zoom-in;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.hobby-img {
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+.hobby-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 110, 253, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    color: #fff;
+    font-size: 2.2rem;
+}
+.hobby-img-wrap:hover .hobby-img { transform: scale(1.05); filter: brightness(0.8); }
+.hobby-img-wrap:hover .hobby-img-overlay { opacity: 1; }
+</style>
+
     <footer class="py-4 text-center">
         <div class="container">
             <p class="mb-0 small text-muted">&copy; <?php echo date("Y"); ?> Chisanupong Kongchang. All rights reserved.</p>
@@ -389,5 +429,19 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function openLightbox(src, caption) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox-caption').textContent = caption;
+        const lb = document.getElementById('lightbox');
+        lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    </script>
 </body>
 </html>
