@@ -40,24 +40,25 @@
         .navbar-toggler-icon{filter:invert(1)}
 
         /* HERO */
-        .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;z-index:1}
+        .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;z-index:2}
+        .hero-section .container{position:relative;z-index:3}
         .hero-section::before{content:'';position:absolute;top:-100px;right:-200px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(99,102,241,0.12) 0%,transparent 70%);pointer-events:none}
         .hero-section::after{content:'';position:absolute;bottom:-100px;left:-200px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(6,182,212,0.08) 0%,transparent 70%);pointer-events:none}
-        .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:20px;opacity:0;animation:fadeUp 0.6s ease 0.2s forwards}
+        .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:20px;opacity:0;animation:fadeUp 0.6s ease 0.2s both}
         .hero-eyebrow span{width:30px;height:1px;background:var(--accent);display:inline-block}
-        .hero-title{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;line-height:1.15;margin-bottom:16px;opacity:0;animation:fadeUp 0.6s ease 0.4s forwards}
+        .hero-title{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;line-height:1.15;margin-bottom:16px;opacity:0;animation:fadeUp 0.6s ease 0.35s both}
         .name-gradient{background:linear-gradient(135deg,#ffffff 30%,var(--accent) 60%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .hero-role{font-size:1rem;color:var(--accent3);font-weight:600;letter-spacing:1px;margin-bottom:24px;opacity:0;animation:fadeUp 0.6s ease 0.5s forwards}
-        .hero-subtitle{color:var(--text-muted);font-size:1rem;max-width:520px;margin-bottom:36px;opacity:0;animation:fadeUp 0.6s ease 0.6s forwards}
-        .hero-cta{opacity:0;animation:fadeUp 0.6s ease 0.8s forwards}
+        .hero-role{font-size:1rem;color:var(--accent3);font-weight:600;letter-spacing:1px;margin-bottom:24px;opacity:0;animation:fadeUp 0.6s ease 0.5s both}
+        .hero-subtitle{color:var(--text-muted);font-size:1rem;max-width:520px;margin-bottom:36px;opacity:0;animation:fadeUp 0.6s ease 0.65s both}
+        .hero-cta{opacity:0;animation:fadeUp 0.6s ease 0.8s both}
         .btn-glow{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:12px 32px;border-radius:8px;font-weight:600;font-size:0.9rem;letter-spacing:0.5px;position:relative;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 0 20px rgba(99,102,241,0.3);display:inline-block;text-decoration:none}
         .btn-glow:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.5);color:#fff}
 
         /* PROFILE IMG */
-        .profile-img-wrap{position:relative;display:inline-block;opacity:0;animation:fadeIn 0.8s ease 0.4s forwards}
-        .profile-img-ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(var(--accent),var(--accent3),var(--accent2),var(--accent));animation:rotateBorder 6s linear infinite;z-index:0}
-        .profile-img-glow{position:absolute;inset:-20px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.15),transparent 70%);animation:glowPulse 3s ease-in-out infinite;z-index:0}
-        .profile-img-wrap img{position:relative;z-index:1;border:5px solid var(--primary-bg);border-radius:50%}
+        .profile-img-wrap{position:relative;display:inline-block;opacity:0;animation:fadeIn 0.8s ease 0.3s both}
+        .profile-img-ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(var(--accent),var(--accent3),var(--accent2),var(--accent));animation:rotateBorder 6s linear infinite;z-index:0;padding:4px}
+        .profile-img-glow{position:absolute;inset:-24px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.18),transparent 70%);animation:glowPulse 3s ease-in-out infinite;z-index:0;pointer-events:none}
+        .profile-img-wrap img{position:relative;z-index:2;border:5px solid var(--primary-bg);border-radius:50%;display:block}
         @keyframes rotateBorder{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes glowPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
 
@@ -177,8 +178,8 @@
         <div class="row align-items-center">
             <div class="col-lg-7 order-2 order-lg-1 mt-5 mt-lg-0">
                 <div class="hero-eyebrow"><span></span> Computer Engineering Student <span></span></div>
-                <h1 class="hero-title"><span class="name-gradient">ชิษณุพงศ์<br>คงช้าง</span></h1>
-                <div class="hero-role">Back-end Developer · AI Enthusiast</div>
+                <h1 class="hero-title"><span class="name-gradient">ชิษณุพงศ์ คงช้าง</span></h1>
+                <div class="hero-role">นักศึกษาวิศวกรรมคอมพิวเตอร์</div>
                 <p class="hero-subtitle">
                     มหาวิทยาลัยราชภัฏพิบูลสงคราม (Pibulsongkram Rajabhat University)<br><br>
                     มีความมุ่งมั่นในการศึกษางานด้านสถาปัตยกรรมซอฟต์แวร์ (Back-end Development) การประมวลผลข้อมูล และการบูรณาการเทคโนโลยีปัญญาประดิษฐ์ (Artificial Intelligence) เพื่อนำมาประยุกต์ใช้ในการแก้ปัญหาทางวิศวกรรม
