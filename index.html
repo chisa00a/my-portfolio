@@ -764,7 +764,7 @@ contactForm.addEventListener('submit', (e) => {
   if(!name || !email || !message){ return; }
   const subject = encodeURIComponent('ติดต่อจากพอร์ตโฟลิโอ — ' + name);
   const body = encodeURIComponent(`ชื่อ: ${name}\nอีเมล: ${email}\n\n${message}`);
-  window.location.href = `mailto:chisanupong.example@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:ggsp0079@gmail.com?subject=${subject}&body=${body}`;
   formNote.textContent = 'กำลังเปิดโปรแกรมอีเมลของคุณ...';
   formNote.classList.add('success');
   contactForm.reset();
