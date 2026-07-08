@@ -315,7 +315,43 @@
       .nav-toggle  { display: block; }
     }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-  </style>
+
+/* ── Architecture & Data Flow preview (Dormi) ───────────────── */
+.arch-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.arch-card { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: transform var(--speed), box-shadow var(--speed); }
+.arch-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.arch-thumb { height: 150px; background: #fff; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--line); padding: 14px; }
+.arch-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.arch-thumb-doc { font-size: 2.4rem; color: var(--clay); background: var(--sand); }
+.arch-body { padding: 16px 18px; }
+.arch-body h5 { font-size: .96rem; margin-bottom: 6px; }
+.arch-body p  { color: var(--stone); font-size: .84rem; margin: 0; }
+ 
+#archModal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(14,10,7,.88); align-items: center; justify-content: center; backdrop-filter: blur(6px); padding: 40px 20px; }
+#archModal.doc-mode { background: rgba(58,46,37,.55); }
+.arch-modal-inner { position: relative; width: 100%; max-width: 880px; max-height: 86vh; background: var(--cream); border-radius: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; overflow: hidden; }
+.arch-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid var(--line); flex-shrink: 0; }
+.arch-modal-header h4 { font-size: 1.05rem; }
+.arch-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--sand); color: var(--bark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background var(--speed), color var(--speed); flex-shrink: 0; }
+.arch-close:hover { background: var(--clay); color: #fff; border-color: var(--clay); }
+.arch-modal-body { padding: 26px; overflow-y: auto; }
+.arch-modal-body img { width: 100%; height: auto; background: #fff; border-radius: 8px; }
+.arch-modal-body.md-body { font-size: .92rem; color: var(--bark); line-height: 1.85; }
+.arch-modal-body.md-body h3, .arch-modal-body.md-body h4, .arch-modal-body.md-body h5, .arch-modal-body.md-body h6 { font-family: 'Noto Serif Thai', serif; margin: 26px 0 10px; }
+.arch-modal-body.md-body h3:first-child { margin-top: 0; }
+.arch-modal-body.md-body p { margin: 0 0 12px; }
+.arch-modal-body.md-body ul { padding-left: 20px; margin: 0 0 12px; }
+.arch-modal-body.md-body li { margin-bottom: 6px; }
+.arch-modal-body.md-body pre { background: var(--bark); color: var(--sand); padding: 14px 16px; border-radius: 10px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: .78rem; line-height: 1.6; margin: 0 0 16px; }
+.arch-modal-body.md-body code { font-family: 'JetBrains Mono', monospace; background: var(--sand); padding: 1px 5px; border-radius: 4px; font-size: .85em; }
+.arch-modal-body.md-body pre code { background: none; padding: 0; }
+.arch-modal-body.md-body table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: .86rem; }
+.arch-modal-body.md-body th, .arch-modal-body.md-body td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+.arch-modal-body.md-body th { background: var(--sand); font-family: 'Sarabun', sans-serif; font-weight: 600; }
+.arch-modal-body .arch-loading { text-align: center; color: var(--stone); padding: 40px 0; font-family: 'JetBrains Mono', monospace; font-size: .85rem; }
+@media (max-width: 700px) { .arch-grid { grid-template-columns: 1fr; } }
+</style>
+
 </head>
 <body data-theme="light">
 
@@ -485,7 +521,52 @@
 
   <div class="strata"><svg viewBox="0 0 1200 70" preserveAspectRatio="none"><path d="M0,30 C300,70 900,0 1200,40 L1200,70 L0,70 Z" fill="var(--cream)"/></svg></div>
 
+  <!--=====================architecture-section=====================-->
+<section id="architecture">
+  <span class="eyebrow-section">// 02.1 — System Architecture & Data Flow</span>
+  <h2 class="section-title">สถาปัตยกรรมระบบ — Dormi</h2>
+  <div class="arch-grid" id="archGrid">
+ 
+    <div class="arch-card reveal"
+         data-type="image"
+         data-src="assets/dormi/dormi-system-architecture.svg"
+         data-title="System Architecture">
+      <div class="arch-thumb"><img src="assets/dormi/dormi-system-architecture.svg" alt="System Architecture diagram" loading="lazy"></div>
+      <div class="arch-body"><h5>System Architecture</h5><p>Next.js → NestJS (modular monolith) → PostgreSQL</p></div>
+    </div>
+ 
+    <div class="arch-card reveal"
+         data-type="image"
+         data-src="assets/dormi/dormi-ticket-data-flow.svg"
+         data-title="Data Flow">
+      <div class="arch-thumb"><img src="assets/dormi/dormi-ticket-data-flow.svg" alt="Ticket data flow diagram" loading="lazy"></div>
+      <div class="arch-body"><h5>Data Flow</h5><p>วงจรชีวิตของตั๋วแจ้งซ่อม ตั้งแต่สร้างจนถึงปิดงาน</p></div>
+    </div>
+ 
+    <div class="arch-card reveal"
+         data-type="markdown"
+         data-src="assets/dormi/dormi-architecture-writeup.md"
+         data-title="Architecture Write-up">
+      <div class="arch-thumb arch-thumb-doc"><i class="bi bi-file-earmark-text"></i></div>
+      <div class="arch-body"><h5>อ่านสรุปฉบับเต็ม (.md)</h5><p>Design decisions, data flow และ tech stack</p></div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- popup เดียวใช้ร่วมกันทั้ง 3 การ์ด -->
+<div id="archModal">
+  <div class="arch-modal-inner">
+    <div class="arch-modal-header">
+      <h4 id="archModalTitle"></h4>
+      <button class="arch-close" id="archModalClose" aria-label="ปิด"><i class="bi bi-x"></i></button>
+    </div>
+    <div class="arch-modal-body" id="archModalBody"></div>
+  </div>
+</div>
+  
   <!-- ══════════════════ 02.5 TIMELINE ══════════════════ -->
+  
   <section id="timeline-section">
     <span class="eyebrow-section">// 02.5 — Education & Timeline</span>
     <h2 class="section-title">เส้นทางการศึกษา</h2>
@@ -681,6 +762,116 @@
   <button id="toTop"><i class="bi bi-arrow-up"></i></button>
 
   <script>
+
+    /*<script>
+/* ── Architecture / Data-flow preview & popup (Dormi) ─────────── */
+(function () {
+  const modal = document.getElementById('archModal');
+  const modalBody = document.getElementById('archModalBody');
+  const modalTitle = document.getElementById('archModalTitle');
+  const modalClose = document.getElementById('archModalClose');
+  const mdCache = new Map();
+ 
+  if (!modal) return; // กันพัง ถ้ายังไม่ได้แปะ HTML ส่วนที่ 2
+ 
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+ 
+  // แปลง markdown -> HTML แบบเบาๆ พอสำหรับไฟล์สรุปโปรเจกต์
+  // รองรับ: heading (#), **bold**, `code`, code fence (```), list (-), table (|...|)
+  function markdownToHtml(md) {
+    const lines = md.replace(/\r\n/g, '\n').split('\n');
+    let html = '', inCode = false, inList = false, tableRows = [];
+ 
+    function flushList() { if (inList) { html += '</ul>'; inList = false; } }
+    function inline(text) {
+      return escapeHtml(text)
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+    function flushTable() {
+      if (!tableRows.length) return;
+      const [headerRow, , ...bodyRows] = tableRows;
+      const cells = (row) => row.split('|').map((c) => c.trim()).filter((c, i, arr) => !(i === 0 && c === '') && !(i === arr.length - 1 && c === ''));
+      html += '<table><thead><tr>' + cells(headerRow).map((c) => `<th>${inline(c)}</th>`).join('') + '</tr></thead><tbody>';
+      bodyRows.forEach((r) => { html += '<tr>' + cells(r).map((c) => `<td>${inline(c)}</td>`).join('') + '</tr>'; });
+      html += '</tbody></table>';
+      tableRows = [];
+    }
+ 
+    for (const line of lines) {
+      if (line.trim().startsWith('```')) {
+        if (!inCode) { flushList(); flushTable(); html += '<pre><code>'; inCode = true; }
+        else { html += '</code></pre>'; inCode = false; }
+        continue;
+      }
+      if (inCode) { html += escapeHtml(line) + '\n'; continue; }
+ 
+      if (/^\|.*\|$/.test(line.trim())) { tableRows.push(line.trim()); continue; }
+      flushTable();
+ 
+      const heading = line.match(/^(#{1,4})\s+(.*)$/);
+      if (heading) { flushList(); const level = heading[1].length + 2; html += `<h${level}>${inline(heading[2])}</h${level}>`; continue; }
+ 
+      if (/^-\s+/.test(line)) { if (!inList) { html += '<ul>'; inList = true; } html += `<li>${inline(line.replace(/^-\s+/, ''))}</li>`; continue; }
+      flushList();
+ 
+      if (!line.trim()) continue;
+      html += `<p>${inline(line)}</p>`;
+    }
+    flushList(); flushTable();
+    if (inCode) html += '</code></pre>';
+    return html;
+  }
+ 
+  async function openArchItem(card) {
+    const type = card.dataset.type;
+    const src = card.dataset.src;
+    const title = card.dataset.title || '';
+ 
+    modalTitle.textContent = title;
+    modal.classList.toggle('doc-mode', type === 'markdown');
+ 
+    if (type === 'image') {
+      modalBody.className = 'arch-modal-body';
+      modalBody.innerHTML = `<img src="${src}" alt="${title}">`;
+    } else {
+      modalBody.className = 'arch-modal-body md-body';
+      modalBody.innerHTML = '<p class="arch-loading">กำลังโหลด...</p>';
+ 
+      try {
+        let text = mdCache.get(src);
+        if (!text) {
+          const res = await fetch(src);
+          if (!res.ok) throw new Error('load failed');
+          text = await res.text();
+          mdCache.set(src, text);
+        }
+        modalBody.innerHTML = markdownToHtml(text);
+      } catch (err) {
+        modalBody.innerHTML = `<p class="arch-loading">โหลดไฟล์ไม่สำเร็จ — เปิดตรงๆ ที่ <a href="${src}" target="_blank">${src}</a></p>`;
+      }
+    }
+ 
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+ 
+  function closeArchModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+ 
+  document.querySelectorAll('#archGrid .arch-card').forEach((card) => {
+    card.addEventListener('click', () => openArchItem(card));
+  });
+ 
+  modalClose.addEventListener('click', closeArchModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeArchModal(); });
+  document.addEventListener('keydown', (e) => { if (modal.style.display === 'flex' && e.key === 'Escape') closeArchModal(); });
+})();
+
     /* ── Preloader ─────────────────────────────── */
     window.addEventListener('load', () => setTimeout(() => document.getElementById('preloader').classList.add('hide'), 400));
     document.getElementById('year').textContent = new Date().getFullYear();
