@@ -216,7 +216,16 @@
 
     /* ─── Gallery ───────────────────────────────────────── */
     .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 26px; }
-    .gallery-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--cream); }
+    .gallery-card { 
+    border-radius: var(--radius); 
+    overflow: hidden; 
+    border: 1px solid var(--line); 
+    background: var(--cream); 
+    /* เพิ่ม 3 บรรทัดนี้ครับ */
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+}
     .card-carousel { position: relative; overflow: hidden; height: 280px; cursor: zoom-in; }
     .card-slides   { display: flex; height: 100%; transition: transform .45s cubic-bezier(.4,0,.2,1); }
     .card-slide    { flex: 0 0 100%; height: 100%; }
@@ -232,7 +241,10 @@
     .card-arrow.next { right: 8px; }
     .card-carousel:hover .card-arrow { opacity: 1; }
     .card-arrow:hover { background: var(--clay); }
-    .gallery-card .body { padding: 22px; }
+    .gallery-card .body { 
+    padding: 22px; 
+    flex-grow: 1; 
+}
     .gallery-card h4 { font-size: 1.05rem; margin-bottom: 7px; }
     .gallery-card p  { color: var(--stone); font-size: .88rem; margin: 0; }
 
@@ -461,15 +473,57 @@
       </div>
     </div>
 
-    <!-- Proficiency Bars -->
-    <div class="skill-bars">
-      <div class="skill-bar-item reveal" style="--pct:88%;"><div class="bar-head"><h6>Python + Flask + FastAPI</h6><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-bar-item reveal" style="--pct:78%;"><div class="bar-head"><h6>JavaScript + TypeScript</h6><span class="bar-pct">78%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-bar-item reveal" style="--pct:75%;"><div class="bar-head"><h6>Node.js + PostgreSQL</h6><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-bar-item reveal" style="--pct:72%;"><div class="bar-head"><h6>HTML + CSS</h6><span class="bar-pct">72%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-bar-item reveal" style="--pct:68%;"><div class="bar-head"><h6>C# + WinForms</h6><span class="bar-pct">68%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
-      <div class="skill-bar-item reveal" style="--pct:62%;"><div class="bar-head"><h6>AI Systems / LLM</h6><span class="bar-pct">62%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+    <!-- Proficiency Levels (แทนที่ Proficiency Bars) -->
+<div class="skill-levels mt-2">
+
+    <!-- Proficient -->
+    <div class="mb-4">
+        <h6 class="fw-bold mb-2" style="color: var(--primary-color, #0d6efd);">
+            <i class="bi bi-star-fill me-2"></i>Proficient
+        </h6>
+        <div class="d-flex flex-wrap gap-2 mb-2">
+            <span class="badge bg-dark px-3 py-2 fw-normal">Python</span>
+            <span class="badge bg-dark px-3 py-2 fw-normal">FastAPI</span>
+            <span class="badge bg-dark px-3 py-2 fw-normal">Flask</span>
+        </div>
+        <p class="text-muted small mb-0">
+            ใช้งานเป็นประจำ: ออกแบบ Backend Architecture, พัฒนา REST API และจัดการประมวลผลข้อมูล (Data Processing) ได้อย่างคล่องแคล่ว
+        </p>
     </div>
+
+    <!-- Intermediate -->
+    <div class="mb-4">
+        <h6 class="fw-bold mb-2" style="color: var(--primary-color, #0d6efd);">
+            <i class="bi bi-star-half me-2"></i>Intermediate
+        </h6>
+        <div class="d-flex flex-wrap gap-2 mb-2">
+            <span class="badge bg-secondary px-3 py-2 fw-normal">Node.js</span>
+            <span class="badge bg-secondary px-3 py-2 fw-normal">JavaScript / TypeScript</span>
+            <span class="badge bg-secondary px-3 py-2 fw-normal">PostgreSQL</span>
+            <span class="badge bg-secondary px-3 py-2 fw-normal">C# (WinForms)</span>
+        </div>
+        <p class="text-muted small mb-0">
+            ประสบการณ์ในโปรเจกต์: พัฒนา Full-Stack Web App, จัดการ Database Schema ระดับเบื้องต้น และสร้าง Desktop Application แบบ Asynchronous
+        </p>
+    </div>
+
+    <!-- Familiar & Tools -->
+    <div class="mb-2">
+        <h6 class="fw-bold mb-2" style="color: var(--primary-color, #0d6efd);">
+            <i class="bi bi-tools me-2"></i>Familiar & Tools
+        </h6>
+        <div class="d-flex flex-wrap gap-2 mb-2">
+            <span class="badge border border-secondary text-secondary px-3 py-2 fw-normal">AI / LLM Integration</span>
+            <span class="badge border border-secondary text-secondary px-3 py-2 fw-normal">Docker</span>
+            <span class="badge border border-secondary text-secondary px-3 py-2 fw-normal">Git / GitHub</span>
+            <span class="badge border border-secondary text-secondary px-3 py-2 fw-normal">HTML / CSS</span>
+        </div>
+        <p class="text-muted small mb-0">
+            ประยุกต์ใช้งาน: เข้าใจกระบวนการนำ AI มาใช้ในโปรเจกต์จริง, การจัดการ Version Control และพื้นฐาน Containerization
+        </p>
+    </div>
+
+</div>
   </section>
 
   <div class="strata"><svg viewBox="0 0 1200 70" preserveAspectRatio="none"><path d="M0,40 C300,0 900,70 1200,30 L1200,70 L0,70 Z" fill="var(--sand)"/></svg></div>
