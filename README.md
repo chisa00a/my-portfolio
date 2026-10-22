@@ -1,4 +1,4 @@
-# CHISA.dev — Atmospheric Tech × Post-Rock Portfolio
+# CHISA.dev 
 
 Production-ready developer portfolio for **Chisanupong Kongchang**, built with
 Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lucide React.
