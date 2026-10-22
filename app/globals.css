@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  Theme tokens — consumed by tailwind.config.ts as rgb(var(--x))     */
+/*  Light-only, minimalist pastel palette.                             */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --bg: 250 250 250; /* #FAFAFA — off-white canvas */
+  --fg: 51 65 85; /* #334155 — dark slate for headings */
+  --muted: 100 116 139; /* #64748B — medium gray for body */
+  --card: 255 255 255; /* paper white surfaces */
+  --line: 51 65 85; /* slate borders used via /alpha */
+  --surface-tint: 243 244 246; /* #F3F4F6 — soft light-gray fills */
+
+  /* Translucent card surfaces — the dot wave peeks through subtly */
+  --card-glass: 255 255 255 / 0.72;
+  --card-glass-strong: 255 255 255 / 0.9;
+
+  /* Soft diffused shadow used across the app */
+  --shadow-soft: 0 6px 24px rgb(51 65 85 / 0.06),
+    0 2px 6px rgb(51 65 85 / 0.04);
+  --shadow-lift: 0 14px 40px rgb(51 65 85 / 0.1),
+    0 4px 10px rgb(51 65 85 / 0.05);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-fg font-body antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Offset anchor targets so they never hide under the floating navbar. */
+section[id] {
+  scroll-margin-top: 110px;
+}
+
+::selection {
+  background: #bae6fd;
+}
+
+/* Keyboard focus */
+*:focus-visible {
+  outline: 2px solid #94a3b8;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@layer components {
+  /* Soft white translucent surface — cards, navbar, drawers.
+     backdrop-blur lets the pastel dot wave peek through subtly. */
+  .glass {
+    background: rgb(var(--card-glass));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgb(var(--line) / 0.07);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-strong {
+    background: rgb(var(--card-glass-strong));
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgb(var(--line) / 0.09);
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Opaque white card with soft diffused shadow (70% minimalist layer) */
+  .card-soft {
+    background: #ffffff;
+    border: 1px solid rgb(var(--line) / 0.06);
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mono {
+    @apply font-mono text-xs tracking-widest uppercase;
+  }
+
+  /* Language swap pulse — applied briefly on toggle */
+  .lang-swapping {
+    animation: lang-swap 260ms ease-in-out;
+  }
+
+  /* Staggered scroll reveal — hidden state applied by JS after hydration only,
+     so a failed hydration never leaves content invisible. */
+  .reveal-hide {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(var(--reveal-y, 30px));
+  }
+
+  .reveal-show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+}
+
+/* Reduced motion: neutralize every decorative animation */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes lang-swap {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  40% {
+    opacity: 0.35;
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Custom scrollbar (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--line) / 0.14);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--line) / 0.24);
+}
